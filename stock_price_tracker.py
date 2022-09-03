@@ -5,7 +5,7 @@ st.title('Simple stock price tracker app')
 
 google = yf.Ticker("GOOG")
 
-goog_df = google.history(period="5y")
+goog_df = google.history(period="1mo")
 
 st.line_chart(goog_df.Close)
 
