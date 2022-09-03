@@ -26,9 +26,9 @@ def display(stock):
   
 if option == "Google":
   display(goog_df)
- elif option == "Apple":
+elif option == "Apple":
   display(aapl_df)
- else:
+else:
   display(msft_df)
   
 
