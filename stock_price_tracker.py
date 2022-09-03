@@ -5,7 +5,7 @@ st.title('Simple stock price tracker app')
 
 interval = st.selectbox(
      'Select interval',
-     ('1d','1mo','6mo','1y','5y','10y')
+     ('1mo','6mo','1y','5y','10y')
 )
 
 
