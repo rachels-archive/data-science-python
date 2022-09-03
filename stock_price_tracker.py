@@ -22,7 +22,7 @@ def display(stock):
   """)
   st.line_chart(stock.Close)
   st.write("""
-  ## Volume
+  ## Trading Volume
   """)
   st.line_chart(goog_df.Volume)
   
