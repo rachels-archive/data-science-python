@@ -8,11 +8,13 @@ option = st.sidebar.selectbox(
     ("Google", "Apple", "Microsoft")
 )
 
-tickers = yf.Tickers('msft aapl goog')
+goog = yf.Ticker("GOOG")
+aapl = yf.Ticker("AAPL")
+msft = yf.Ticker("MSFT")
 
-goog_df = tickers.goog.history(period="1y")
-aapl_df = tickers.aapl.history(period="1y")
-msft_df = tickers.msft.history(period="1y")
+goog_df = goog.history(period="1y")
+aapl_df = aapl.history(period="1y")
+msft_df = msft.history(period="1y")
 
 def display(stock):
   st.write("""
