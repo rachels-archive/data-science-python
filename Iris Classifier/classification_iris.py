@@ -7,8 +7,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 st.write("""
-# Iris Flower Prediction using Logistic Regression
-This app predicts the **Iris flower** species!
+# Iris Flower Prediction App
+This app predicts the Iris flower species based on user inputs using the **logistic regression** algorithm.
 """)
 
 image_url = "![Iris Species](https://www.researchgate.net/publication/349634676/figure/fig2/AS:995453013336067@1614345901799/Three-classes-of-IRIS-dataset-for-classification-17.jpg)"
@@ -30,8 +30,6 @@ def user_input_features():
     return features
 
 df = user_input_features()
-st.subheader('User Input parameters')
-st.write(df)
 
 # load data set
 data = sns.load_dataset("iris")
@@ -47,14 +45,13 @@ y = data.iloc[:, -1] # All rows for last column
 # split the data into 80% training and 20% testing
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-#train the model
+# train the model
 model = LogisticRegression()
 model.fit(x_train, y_train)
 
-#test the model
-predictions = model.predict(x_test)
+# test the model
 prediction = model.predict(df)
 
-if st.button("Predict"):
+if st.button("Click here to classify"):
     st.success(prediction)
 
