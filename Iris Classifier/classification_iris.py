@@ -1,17 +1,19 @@
-#import dependencies
+# import dependencies
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 st.write("""
-# Iris Flower Prediction App
+# Iris Flower Prediction using Logistic Regression
 This app predicts the **Iris flower** species!
 """)
+
+image_url = "![Iris Species](https://www.researchgate.net/publication/349634676/figure/fig2/AS:995453013336067@1614345901799/Three-classes-of-IRIS-dataset-for-classification-17.jpg)"
+st.markdown(image_url)
+
 
 st.sidebar.header('User Input Parameters')
 
@@ -31,18 +33,18 @@ df = user_input_features()
 st.subheader('User Input parameters')
 st.write(df)
 
-#load data set
+# load data set
 data = sns.load_dataset("iris")
 data.head()
 
-#prepare training set
+# prepare training set
 # X = feature set
 X = data.iloc[:, :-1] #Every column except last column
 
 # y = target value
 y = data.iloc[:, -1] # All rows for last column
 
-#split the data into 80% training and 20% testing
+# split the data into 80% training and 20% testing
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 #train the model
@@ -56,7 +58,3 @@ prediction = model.predict(df)
 if st.button("Predict"):
     st.success(prediction)
 
-st.subheader('Confusion Metrics')
-report = classification_report(y_test, predictions, output_dict=True)
-report_df = df = pd.DataFrame(report).transpose()
-st.write(report_df)
