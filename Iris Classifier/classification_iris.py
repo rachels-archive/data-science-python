@@ -28,7 +28,6 @@ def user_input_features():
     return features
 
 df = user_input_features()
-
 st.subheader('User Input parameters')
 st.write(df)
 
@@ -43,49 +42,6 @@ X = data.iloc[:, :-1] #Every column except last column
 # y = target value
 y = data.iloc[:, -1] # All rows for last column
 
-
-"""
-# plot relation between each feature and species
-# plot relation between sepal length and species
-plt.xlabel("Feature")
-plt.ylabel("Species")
-
-pltX = data.loc[:, 'sepal_length']
-pltY = data.loc[:, 'species']
-#create scatter plot
-plt.scatter(pltX,pltY, label='sepal_length', color='blue')
-
-# plot relation between sepal width and species
-plt.xlabel("Feature")
-plt.ylabel("Species")
-
-pltX = data.loc[:, 'sepal_width']
-pltY = data.loc[:, 'species']
-#create scatter plot
-plt.scatter(pltX,pltY, label='sepal_width', color='black')
-
-# plot relation between petal length and species
-plt.xlabel("Feature")
-plt.ylabel("Species")
-
-pltX = data.loc[:, 'petal_length']
-pltY = data.loc[:, 'species']
-#create scatter plot
-plt.scatter(pltX,pltY, label='petal_length', color='red')
-
-# plot relation between petal width and species
-plt.xlabel("Feature")
-plt.ylabel("Species")
-
-pltX = data.loc[:, 'petal_width']
-pltY = data.loc[:, 'species']
-#create scatter plot
-plt.scatter(pltX,pltY, label='petal_width', color='green')
-
-plt.legend(loc=4, prop={"size":8})
-plt.show()
-"""
-
 #split the data into 80% training and 20% testing
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -94,10 +50,13 @@ model = LogisticRegression()
 model.fit(x_train, y_train)
 
 #test the model
-predictions = model.predict(df)
+predictions = model.predict(x_test)
+prediction = model.predict(df)
 
 if st.button("Predict"):
-    st.success(predictions)
+    st.success(prediction)
 
-#check presicion, recall, f1-score
-#print(classification_report(y_test, predictions))
+st.subheader('Confusion Metrics')
+report = classification_report(y_test, predictions, output_dict=True)
+report_df = df = pd.DataFrame(report).transpose()
+st.write(report_df)
